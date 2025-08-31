@@ -1,0 +1,67 @@
+---
+title: "Tutorial Upload Folder atau File ke Repo GitHub"
+date: "2025-08-31"
+tags: "github   "
+emoji: "📂"
+---
+
+Kalau kamu baru aja bikin proyek atau mungkin punya folder yang pengen disimpen di GitHub,  
+aku kasih tau caranya yang simpel banget. Karena dulu aku juga sempet bingung, gimana cara upload
+folder utuh ke repo GitHub tanpa ribet. Nah sekarang aku share pengalaman ku biar kalian gak kelimpungan
+lagi kalau mau upload.
+
+tapi syarat nya kalian harus install git di komputer atau laptop kalian dulu ya
+
+## Step 1 – Buat Repo Dulu di GitHub
+
+Pertama buka [GitHub](https://github.com) terus klik tombol **New repository**.  
+Isi nama repo sesuai keinginan, kasih deskripsi kalau perlu, trus klik **Create repository**.
+
+## Step 2 – Upload
+
+Buka terminal / cmd di folder yang akan di upload:
+atau kalau kamu menggunakan windows 11 bisa klik kanan di folder yang akan di upload lalu klik kanan.
+maka akan muncul opsi
+
+```
+open in terminal
+```
+
+lalu tinggal kalian ketikan ini di terminal
+
+```
+git init
+```
+
+selanjutnya
+
+```
+git add .
+```
+
+dan selanjutnya kalian isikan pesan untuk commit pertama
+
+```
+git commit -m "ini upload file pertama ku"
+```
+
+lalu pilih branch atau cabang di mana kalian mau mengupload nya
+biasa nya github otamatis menyarankan ke cabang main
+
+```
+git branch -M main
+```
+
+lalu remote repository yang sudah kalian buat tadi dengan cara
+
+```
+git remote add origin https://github.com/username_kalian/nama_repo_kalian.git
+```
+
+langkah selanjutnya sekaligus langkah terakhir adalah mengupload
+
+```
+git push -u origin main
+```
+
+## Sekian terimakasih sudah membaca semoga bermanfaat

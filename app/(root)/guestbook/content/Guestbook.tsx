@@ -6,10 +6,10 @@ export default function GuestBook() {
   return (
     <section>
       <Giscus
-        repo="byanrkh/site"
-        repoId="R_kgDONsSOxA"
+        repo="aditrachman/portofolio"
+        repoId="R_kgDOPnMSwQ"
         category="General"
-        categoryId="DIC_kwDONsSOxM4CmaAO"
+        categoryId="DIC_kwDOPnMSwc4Cuyor"
         mapping="pathname"
         strict="0"
         reactionsEnabled="1"
