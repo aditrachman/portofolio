@@ -27,9 +27,9 @@ export default function Footer() {
     <footer className="border-t border-t-[#202024] py-8">
       <div className="px-4 sm:mx-auto max-w-3xl sm:flex justify-between items-center">
         <p className="text-sm">
-          © {new Date().getFullYear()} Abyan Raditya, All right reserved.
+          © {new Date().getFullYear()} Aditrachman, All right reserved.
         </p>
-        <Link href={"https://instagram.com/byanrkh"} target="_blank">
+        <Link href={"https://instagram.com/aditrachman23"} target="_blank">
           <Instagram size={13} />
         </Link>
       </div>
