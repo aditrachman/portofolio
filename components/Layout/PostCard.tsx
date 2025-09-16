@@ -1,45 +1,56 @@
 import Link from "next/link";
 import type { Post } from "@/types";
 import { formatDate } from "@/libs/Blog/formatDate";
+import { Clock, Calendar, ArrowRight } from "react-feather";
 
 export default function PostCard({ post }: { post: Post }) {
   return (
-    <div
-      key={post.slug}
-      className="border border-[#252529] bg-[#141417] p-5 rounded-xl"
-    >
-      <div className="flex justify-between">
-        <div className="flex gap-3">
-          <div className="h-14 w-14 border border-[#252529] bg-[#1a1a1e] rounded-xl flex items-center justify-center text-2xl">
-            {post.emoji}
+    <div className="border border-border rounded-2xl p-6 hover:border-border-light transition-colors group">
+      <div className="flex items-start gap-4">
+        {/* Emoji Icon */}
+        <div className="flex-shrink-0 w-12 h-12 bg-background-secondary border border-border rounded-xl flex items-center justify-center text-xl">
+          {post.emoji}
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 min-w-0 space-y-3">
+          <div className="space-y-2">
+            <Link href={`/writings/${post.slug}`}>
+              <h3 className="text-lg font-semibold text-foreground group-hover:text-white transition-colors cursor-pointer">
+                {post.title}
+              </h3>
+            </Link>
+
+            <div className="flex items-center gap-4 text-sm text-foreground-muted">
+              <div className="flex items-center gap-1">
+                <Clock size={12} />
+                <span>{post.readTime} min read</span>
+              </div>
+              <div className="w-1 h-1 bg-foreground-muted rounded-full" />
+              <div className="flex items-center gap-1">
+                <Calendar size={12} />
+                <span>{formatDate(post.date)}</span>
+              </div>
+            </div>
           </div>
-          <div className="mt-1">
+
+          <div className="flex items-center justify-between">
+            <Link
+              href={`/writings/tags/${post.tags}`}
+              className="inline-flex items-center px-3 py-1 bg-background-secondary text-foreground-muted text-sm rounded-full border border-border hover:border-border-light transition-colors font-mono"
+            >
+              #{post.tags}
+            </Link>
+
             <Link
               href={`/writings/${post.slug}`}
-              className="text-lg font-black flex gap-2"
+              className="flex items-center gap-1 text-sm text-foreground-muted group-hover:text-white transition-colors"
             >
-              {post.title}
-              <div className="block sm:hidden text-sm bg-[#18181b] border border-[#252529] rounded px-1 py-0.5 text-zinc-500">
-                # {post.tags}
-              </div>
+              <span>Read more</span>
+              <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
             </Link>
-            <ul className="text-zinc-400 flex items-center gap-2 text-sm">
-              <li>{post.readTime} min read</li>
-              <div className="bg-zinc-400 rounded-full h-[3px] w-[3px] aspect-square flex-none relative "></div>
-              <li>{formatDate(post.date)}</li>
-            </ul>
           </div>
         </div>
-        <ul>
-          <ul className="sm:flex gap-1 hidden">
-            <Link
-              className="text-sm hover:underline bg-[#18181b] border border-[#252529] rounded px-1 py-0.5 text-zinc-500"
-              href={`/writings/tags/${post.tags}`}
-            >
-              # {post.tags}
-            </Link>
-          </ul>
-        </ul>
       </div>
     </div>
   );

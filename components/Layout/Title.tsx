@@ -8,11 +8,15 @@ export default function Title({
   emoji: string;
 }) {
   return (
-    <h1 className="text-3xl font-extrabold relative flex group cursor-pointer mb-5 w-fit items-center">
-      {children}
-      <span className="absolute -left-12 top-0 hidden group-hover:block">
-        {emoji}
-      </span>
-    </h1>
+    <div className="mb-8">
+      <h2 className="text-2xl sm:text-3xl font-bold text-foreground flex items-center gap-3">
+        <span className="text-2xl sm:text-3xl">
+          {emoji}
+        </span>
+        <span>
+          {children}
+        </span>
+      </h2>
+    </div>
   );
 }

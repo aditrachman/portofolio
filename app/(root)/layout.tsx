@@ -4,10 +4,14 @@ import React, { ReactNode } from "react";
 
 export default function layout({ children }: { children?: ReactNode }) {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="px-4 sm:mx-auto max-w-3xl my-20">{children}</main>
+      <main className="flex-1 px-4 sm:px-6 lg:px-8 mx-auto max-w-4xl w-full py-12 sm:py-16 lg:py-20">
+        <div className="animate-fade-in-up">
+          {children}
+        </div>
+      </main>
       <Footer />
-    </>
+    </div>
   );
 }

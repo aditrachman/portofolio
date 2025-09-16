@@ -2,6 +2,8 @@ import React from "react";
 
 export default function Divider() {
   return (
-    <div className="h-[1px] my-20 bg-gradient-to-r from-10% to-90% from-background via-zinc-600 to-background"></div>
+    <div className="my-16 sm:my-20 lg:my-24">
+      <div className="w-full h-px bg-border"></div>
+    </div>
   );
 }

@@ -3,11 +3,119 @@
 @tailwind utilities;
 
 :root {
-  --background: #111113;
-  --foreground: #d4d4d4;
+  --background: #0a0a0a;
+  --background-secondary: #111111;
+  --background-tertiary: #1a1a1a;
+  --foreground: #ffffff;
+  --foreground-muted: #888888;
+  --border: #222222;
+  --border-light: #333333;
+  --accent: #ffffff;
+  --accent-hover: #f5f5f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
+  min-height: 100vh;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--foreground);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 1px solid var(--border-light);
+  outline-offset: 2px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(17, 17, 17, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-1px);
 }
