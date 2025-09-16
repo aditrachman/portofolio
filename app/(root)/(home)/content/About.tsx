@@ -18,8 +18,8 @@ export default function About() {
       <div className="space-y-8">
         <div className="space-y-6">
           <p className="text-lg text-foreground leading-relaxed">
-            I was born in <span className="text-white font-medium">Magelang, Indonesia</span>, and I'm a frontend developer
-            and data analyst. Since an early age, I've been fascinated by
+            I was born in <span className="text-white font-medium">Magelang, Indonesia</span>, and I&apos;m a frontend developer
+            and data analyst. Since an early age,  I&apos;ve been fascinated by
             technology and creativity, which led me to explore how things work
             and how data can shape better decisions.
           </p>
@@ -47,10 +47,10 @@ export default function About() {
 
         <div className="border border-border rounded-2xl p-6 bg-background-secondary/30">
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-foreground">Let's Work Together</h3>
+            <h3 className="text-lg font-medium text-foreground">Lets Work Together</h3>
             <p className="text-foreground-muted leading-relaxed">
               If you have an interesting project or need someone with a mix
-              of frontend and data analysis skills, feel free to reach out—I'd
+              of frontend and data analysis skills, feel free to reach out—I&apos;d
               be happy to collaborate and bring your ideas to life.
             </p>
           </div>

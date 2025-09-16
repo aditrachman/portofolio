@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Instagram, GitHub, Mail, ExternalLink } from "react-feather";
+import { Instagram, GitHub, Mail } from "react-feather";
 import { useState, useEffect } from "react";
 
 export default function Footer() {
@@ -19,11 +19,11 @@ export default function Footer() {
     setTime(formattedTime);
   };
 
-  useEffect(() => {
-    updateTime();
-    const intervalId = setInterval(updateTime, 1000);
-    return () => clearInterval(intervalId);
-  }, []);
+useEffect(() => {
+  updateTime();
+  const intervalId = setInterval(updateTime, 1000);
+  return () => clearInterval(intervalId);
+}, [updateTime]);
 
   const socialLinks = [
     {

@@ -40,8 +40,7 @@ export default async function Blog() {
             <div className="space-y-2">
               <h3 className="text-lg font-semibold text-foreground">No posts yet</h3>
               <p className="text-foreground-muted">
-                I'm working on some amazing content. Check back soon!
-              </p>
+I&apos;m working on some amazing content. Check back soon!              </p>
             </div>
           </div>
         )}
