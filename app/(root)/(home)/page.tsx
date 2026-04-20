@@ -16,7 +16,7 @@ export default function page() {
           <div className="flex-1 space-y-8 text-center sm:text-left">
             <div className="space-y-4">
               <div className="flex items-center justify-center sm:justify-start gap-2 text-sm text-foreground-muted">
-                <div className="w-2 h-2 bg-white rounded-full" />
+                <div className="w-2 h-2 bg-green-400 rounded-full" />
                 <span>Available for work</span>
               </div>
 
@@ -38,7 +38,7 @@ export default function page() {
               <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 sm:gap-6 text-sm text-foreground-muted">
                 <div className="flex items-center gap-2">
                   <MapPin size={16} />
-                  <span>Jakarta, Indonesia</span>
+                  <span>Magelang, Indonesia</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar size={16} />

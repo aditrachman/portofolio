@@ -7,6 +7,17 @@ import { ExternalLink, GitHub } from "react-feather";
 export default function Projects() {
   const projects = [
     {
+      label: "Aether Swarm Intelligence",
+      image: "aether-swarm.png", // 
+      tech: "Next.js & FastAPI",
+      summary: "A professional Behavioral Intelligence Engine that simulates social agents' reactions to specific topics and predicts social stability or volatility using real-time data analysis.",
+      tags: ["Next.js", "Tailwind CSS", "Recharts", "FastAPI"],
+      link: "https://github.com/aditrachman/Simulation-Prediction-Engine",
+      github: "https://github.com/aditrachman/Simulation-Prediction-Engine",
+      status: "Completed"
+    },
+
+    {
       label: "Read Manga Website",
       image: "mocomanga.png",
       tech: "Next.js",
@@ -17,16 +28,7 @@ export default function Projects() {
       github: "https://github.com/aditrachman/mocomanga",
       status: "Live"
     },
-    {
-      label: "Rental Pacar Website",
-      image: "rena.png",
-      tech: "TypeScript",
-      summary: "A fun experimental project simulating a girlfriend rental service. Showcases frontend and UI/UX creativity.",
-      tags: ["NextJS", "MDX", "TypeScript"],
-      link: "https://github.com/aditrachman/rental-pacar",
-      github: "https://github.com/aditrachman/rental-pacar",
-      status: "Demo"
-    },
+
     {
       label: "Sentiment Analysis App",
       image: "analisa.png",

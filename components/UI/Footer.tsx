@@ -38,7 +38,7 @@ useEffect(() => {
     },
     {
       name: "Email",
-      href: "mailto:aditrachman@example.com",
+      href: "mailto:aditrachman23@gmail.com",
       icon: Mail,
     }
   ];
@@ -54,7 +54,7 @@ useEffect(() => {
             {time && (
               <div className="flex items-center gap-2 font-mono text-xs">
                 <div className="w-2 h-2 bg-white rounded-full" />
-                <span>Jakarta • {time}</span>
+                <span>Magelang • {time}</span>
               </div>
             )}
           </div>
