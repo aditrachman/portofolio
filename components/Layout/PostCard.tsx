@@ -44,7 +44,7 @@ export default function PostCard({ post }: { post: Post }) {
 
             <Link
               href={`/writings/${post.slug}`}
-              className="flex items-center gap-1 text-sm text-foreground-muted group-hover:text-white transition-colors"
+              className="flex items-center gap-1 text-sm text-foreground-muted group-hover:text-black transition-colors"
             >
               <span>Read more</span>
               <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
