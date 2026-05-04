@@ -7,14 +7,14 @@ import { ExternalLink, GitHub } from "react-feather";
 export default function Projects() {
   const projects = [
     {
-      label: "Aether Swarm Intelligence",
+      label: "VoxSwarm",
       image: "aether-swarm.png", // 
       tech: "Next.js & FastAPI",
       summary: "A professional Behavioral Intelligence Engine that simulates social agents' reactions to specific topics and predicts social stability or volatility using real-time data analysis.",
-      tags: ["Next.js", "Tailwind CSS", "Recharts", "FastAPI"],
+      tags: ["Next.js", "Tailwind CSS", "Python", "FastAPI"],
       link: "https://github.com/aditrachman/Simulation-Prediction-Engine",
       github: "https://github.com/aditrachman/Simulation-Prediction-Engine",
-      status: "Completed"
+      status: "On Progress"
     },
 
     {
