@@ -40,7 +40,7 @@ export default async function Blog() {
             <div className="space-y-2">
               <h3 className="text-lg font-semibold text-foreground">No posts yet</h3>
               <p className="text-foreground-muted">
-I&apos;m working on some amazing content. Check back soon!              </p>
+                I&apos;m working on some amazing content. Check back soon!</p>
             </div>
           </div>
         )}
@@ -50,13 +50,13 @@ I&apos;m working on some amazing content. Check back soon!              </p>
         <div className="text-center pt-4">
           <Link
             href="/writings"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-hover text-white rounded-lg transition-all hover-lift font-medium"
+            className="inline-flex items-center gap-2 px-6 py-3 border border-border hover:border-border-light text-foreground rounded-lg transition-colors"
           >
-            <PenTool size={16} />
             Read More Articles
             <ArrowRight size={16} />
           </Link>
         </div>
+
       )}
     </section>
   );
