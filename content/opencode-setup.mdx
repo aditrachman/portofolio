@@ -1,0 +1,327 @@
+---
+title: "Cara Setup OpenCode: AI Coding Assistant yang Bisa Buka Browser"
+date: "2026-06-22"
+tags: "ai"
+emoji: "🤖"
+---
+
+Beberapa waktu lalu aku nemuin tools namanya **OpenCode** — AI coding assistant
+yang jalan di terminal dan bisa di-custom habis-habisan. Yang paling bikin aku
+tertarik, dia bisa **buka browser otomatis** buat login ke website, download
+file, atau scrape data tanpa aku harus ngapa-ngapain.
+
+Di artikel ini aku bakal share cara setup OpenCode dari nol, termasuk model
+gratisan yang langsung bisa dipake.
+
+## Kenapa Pake OpenCode?
+
+Sebelum masuk ke tutorial, kenali dulu fitur-fiturnya:
+
+- **Browser automation** — AI bisa buka browser, login, klik tombol, download file
+- **Custom agents** — bikin AI dengan persona berbeda (kalem, ceria, pendiam, dll)
+- **Skills/plugins** — extend kemampuan AI sesuai kebutuhan
+- **75+ LLM providers** — termasuk model gratisan
+- **Privacy first** — code kamu disimpan lokal, ga dikirim kemana-mana
+
+Intinya, ini kayak ChatGPT tapi yang bisa beneran ngapa-ngapain di komputer kamu.
+
+## Step 1: Install Node.js
+
+OpenCode butuh Node.js buat jalan. Kalau kamu belum install, ini caranya:
+
+1. Buka **https://nodejs.org**
+2. Download versi **LTS** (Long Term Support) — yang paling stabil
+3. Buka file installer yang sudah didownload
+4. Klik **Next** terus sampe selesai
+5. Buka terminal buat cek udah ke-install apa belum:
+
+```bash
+node --version
+```
+
+Kalau muncul versi (misal `v20.x.x` atau `v22.x.x`), berarti udah sukses.
+
+## Step 2: Install OpenCode
+
+Setelah Node.js terinstall, tinggal jalankan satu command ini di terminal:
+
+```bash
+npm install -g opencode-ai
+```
+
+Tunggu sampe selesai, terus cek udah ke-install apa belum:
+
+```bash
+opencode --version
+```
+
+Kalau muncul versi, berarti udah siap dipake.
+
+**Alternatif lain (sesuai OS):**
+
+| OS | Command |
+|----|---------|
+| Windows | `choco install opencode` atau `scoop install opencode` |
+| macOS | `brew install anomalyco/tap/opencode` |
+| Linux | `sudo pacman -S opencode` (Arch) |
+| Semua OS | `curl -fsSL https://opencode.ai/install \| bash` |
+
+## Step 3: Pilih Model Gratisan
+
+Ini bagian yang paling penting. OpenCode mendukung banyak provider, tapi
+kalau kamu mau yang **gratis dan langsung bisa dipake**, ada beberapa opsi:
+
+### OpenCode Zen (Rekomendasi)
+
+OpenCode Zen itu daftar model yang udah di-test dan di-verify sama tim OpenCode.
+Cara pakenya:
+
+1. Buka terminal di folder project kamu
+2. Jalankan `opencode`
+3. Ketik `/connect` di dalam TUI
+4. Pilih **OpenCode Zen**
+5. Buka **opencode.ai/zen** di browser
+6. Sign in, isi billing details, copy API key
+7. Paste API key di terminal
+
+Terus jalankan `/models` buat lihat model yang tersedia.
+
+### OpenCode Go
+
+Ini opsi subscription murah yang kasih akses ke model-model coding populer.
+Caranya sama kayak Zen — `/connect` → pilih **OpenCode Go** → daftar → paste API key.
+
+### GitHub Copilot
+
+Kalau kamu udah punya akun **GitHub Copilot**, langsung bisa dipake di OpenCode
+tanpa setup tambahan. Tinggal login pake akun GitHub kamu.
+
+### ChatGPT Plus/Pro
+
+Punya subscription **ChatGPT Plus** atau **Pro**? Langsung bisa dipake juga.
+Tinggal login pake akun OpenAI kamu.
+
+### Model Lokal (Gratis Selamanya)
+
+Kalau mau yang bener-bener gratis tanpa batas, kamu bisa jalanin model lokal
+pake **Ollama** atau **Atomic Chat**. Tapi butuh hardware yang lumayan
+kuat (minimal 16GB RAM buat model yang lumayan gede).
+
+## Step 4: Setup Browser Automation (Playwright)
+
+Nah ini yang paling seru — bikin AI bisa buka browser. Caranya:
+
+Buat file `opencode.json` di folder project kamu:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx", "@playwright/mcp@latest",
+        "--browser", "chromium"
+      ],
+      "enabled": true
+    }
+  }
+}
+```
+
+Kalau mau pake browser sendiri (kayak Brave atau Chrome), tambahin
+`--executable-path`:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx", "@playwright/mcp@latest",
+        "--browser", "chromium",
+        "--executable-path", "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
+      ],
+      "enabled": true
+    }
+  }
+}
+```
+
+Sekarang AI bisa:
+- Navigate ke URL manapun
+- Fill form (login, register, dll)
+- Klik tombol
+- Screenshot halaman
+- Scrape data
+- Download file
+
+**Contoh prompt:**
+
+```
+"Buka website X, login dengan email Y, lalu download semua invoice"
+```
+
+AI bakal eksekusi semuanya otomatis. Ga perlu buka browser manual lagi.
+
+## Step 5: Custom Agents
+
+Ini fitur yang paling fun menurutku. Kamu bisa bikin AI dengan karakter
+berbeda-beda.
+
+Caranya gampang — buat file `.md` di folder `~/.config/opencode/agent/`:
+
+```markdown
+---
+name: Assistant Kamu
+description: Assistant yang helpful dan ramah
+mode: primary
+permission:
+  edit: ask
+  bash: ask
+---
+Kamu adalah assistant yang helpful dan ramah...
+
+## Gaya bicara
+- Ramah dan sabar
+- Selalu kasih penjelasan lengkap
+- Pakai bahasa yang mudah dimengerti
+```
+
+Aku bikin dua agent sekaligus — satu yang ceria (Raya-chan) dan satu yang
+pendiam & efisien (Catastrovia). Jadi bisa disesuaikan mood-nya.
+
+## Step 6: Install Skills
+
+OpenCode dukung "skills" — plugins buat extend kemampuan AI. Beberapa
+skill yang aku pake:
+
+### Frontend Design
+Bantu desain UI/UX. Kalau kamu bingung mau bikin tampilan kayak gimana,
+skill ini kasih guidance soal typography, color scheme, dll.
+
+### Understand
+Analisis codebase dan bikin knowledge graph interaktif. Berguna banget kalau
+kamu warisan project orang lain dan ga ngerti strukturnya.
+
+### Understand Chat
+Kayak Understand tapi versi chat. Kamu bisa tanya-tanya soal codebase langsung.
+
+### Understand Diff
+Analisis git diff atau pull request. Kasih tau apa yang berubah, komponen
+yang terdampak, dan potensi risk.
+
+### Understand Explain
+Deep-dive explanation ke file, function, atau module tertentu. Kalau kamu
+ga ngerti kode orang, skill ini bantu jelasin.
+
+**Install skill:**
+
+```bash
+opencode skill install frontend-design
+```
+
+Atau manual — copy folder skill ke `~/.agents/skills/`.
+
+## Step 7: Custom Commands
+
+Selain skills, kamu juga bisa bikin custom commands. Contohnya aku bikin:
+
+### BuildCRUD
+Auto-generate CRUD operations. Tinggal sebutin entity-nya, AI bakal generate
+model, controller, dan view-nya.
+
+### Context7
+Fetch dokumentasi library/framework terbaru langsung dari Context7. Jadi kalau
+kamu tanya "cara setup JWT di Next.js 14", AI bakal fetch dokumentasi terbarunya.
+
+## Step 8: Push ke GitHub langsung dari Chat
+
+Kalau kamu udah selesai ngerjain sesuatu pake OpenCode, kamu bisa langsung
+push ke GitHub tanpa harus ketik command manual. Tinggal bilang aja ke AI:
+
+```
+"commit semua perubahan dan push ke github"
+```
+
+AI bakal otomatis jalanin command-command ini:
+
+```bash
+git add .
+git commit -m "pesan commit yang sesuai"
+git push origin main
+```
+
+Kamu juga bisa kasih instruksi lebih spesifik:
+
+```
+"commit dengan pesan 'fitur login udah jadi', terus push ke branch feature-login"
+```
+
+Atau kalau mau sekalian bikin pull request:
+
+```
+"commit, push, dan bikin pull request ke branch main"
+```
+
+Fitur ini super berguna banget menurutku, apalagi kalau lagi males buka
+terminal sendiri. Tinggal chat, AI yang gerakin.
+
+**Tapi perlu diingat**, pastikan kamu udah setup Git di komputer kamu dulu ya.
+Kalau belum, install dulu dari **https://git-scm.com** terus konfigurasi
+nama dan email kamu:
+
+```bash
+git config --global user.name "Nama Kamu"
+git config --global user.email "emailkamu@github.com"
+```
+
+## Contoh Use Case
+
+### Auto Cek Tugas Kuliah
+
+```
+User: "buka moca, ada tugas ga?"
+
+AI: *buka browser, login MOCA, scan tugas*
+    Ada 2 tugas pending:
+    1. Tugas Neural Network - Deadline 28 Juni
+    2. Studi Kasus SVM - Deadline 30 Juni
+```
+
+### Analisis Codebase
+
+```
+User: "jelasin fungsi auth di project ini"
+
+AI: *analisis codebase pake Understand skill*
+    Fungsi auth di project ini pakai JWT...
+    [penjelasan lengkap]
+```
+
+### Debugging Code
+
+```
+User: "error ini ga ngerti, bantu jelasin"
+
+AI: *pake Understand Explain skill*
+    Error ini terjadi karena...
+    [penjelasan + solusi]
+```
+
+## Kesimpulan
+
+OpenCode itu AI coding assistant yang powerful banget kalau kamu mau customize
+habis-habisan. Yang paling aku suka:
+
+- ✅ Browser automation pake Playwright
+- ✅ Custom agents dengan persona unik
+- ✅ Skills buat extend kemampuan
+- ✅ Model gratisan yang langsung bisa dipake
+- ✅ Push ke GitHub langsung dari chat
+- ✅ Privacy first — code disimpan lokal
+
+Setup sekali, produktif selamanya.
+
+## Terima kasih sudah membaca semoga bermanfaat
