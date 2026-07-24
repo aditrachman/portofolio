@@ -1,0 +1,62 @@
+---
+title: "Bikin OpenCode Nyimpen Riwayat Chat ke Obsidian Otomatis"
+date: "2026-07-24"
+tags: "opencode, obsidian, dev"
+emoji: "📝"
+---
+
+Beberapa minggu terakhir aku iseng-iseng ngoprek plugin system OpenCode. Bukan apa-apa, ada satu masalah yang udah lama mengganggu: setiap kali nutup sesi chat OpenCode, riwayat obrolan lenyap begitu aja. Yang tersisa cuma command `opencode -s ses_xxx` yang informatifnya... ya nol besar. Cuma ID, nggak ada konteks, nggak ada isi. Mau baca ulang obrolan kemarin soal debug API tertentu? Siap-siap buka ulang dari awal atau lupa sama sekali.
+
+## Kenapa Obsidian?
+
+Aku udah pake Obsidian buat nyatetin hampir semua hal — daily notes, ide project, catetan meeting, bahkan draft tulisan kayak gini. Udah kayak "second brain" beneran. Jadi daripada bikin sistem penyimpanan baru yang terpisah, kenapa nggak nempel aja riwayat chat-nya di vault yang sama? Satu tempat buat semuanya, bisa di-search bareng, di-tag bareng, dan dibaca offline kapan aja.
+
+Solusi yang paling masuk akal: bikin plugin yang otomatis nyimpen setiap sesi chat jadi file markdown di folder khusus dalam vault Obsidian.
+
+## Cara Kerjanya
+
+OpenCode punya plugin system dengan event `session.idle` — event ini kepancing setiap kali sesi selesai ngasih jawaban dan lagi nunggu input berikutnya. Momen yang pas buat trigger auto-save tanpa ganggu workflow.
+
+Alurnya kurang lebih gini:
+
+1. Plugin nangkep event `session.idle` setelah obrolan selesai
+2. Panggil `opencode export <sessionID>` buat dapetin data sesi dalam format JSON
+3. JSON di-parse, diambil cuma bagian teks obrolan yang bener — metadata teknis kayak `reasoning` atau `step-finish` dibuang, biar outputnya bersih
+4. Ditulis jadi file markdown ke folder `Vault/Chat History/` di Obsidian
+5. Nama file dibuat readable: `2026-07-24 - judul obrolan (ses_xxx).md` — enak di-browse manual, tapi session ID tetap ada buat koneksi balik ke OpenCode kalo perlu
+
+Hasilnya: setiap selesai ngobrol, file markdown langsung muncul di vault. Bisa dibaca di Obsidian, di-search pake native search Obsidian, atau di-tag sesuai kebutuhan. Simpel, nggak perlu ribet.
+
+## Pelajaran yang Didapat dengan Cara Agak Konyol
+
+Nah, bagian ini yang paling berharga buatku: kesalahan-kesalahan bodoh yang nyedot waktu berjam-jam.
+
+**Pertama: masalah `--sanitize`.**
+
+Pas pertama kali coba `opencode export`, aku liat opsi flag `--sanitize` yang "kedengerannya" bikin output lebih aman. Langsung aja aku pasang, karena ya siapa sih yang nggak mau "aman"? Ternyata yang terjadi -- flag ini nge-redact SEMUA isi teks jadi `[redacted:...]`. Iya, semua. Jadi JSON yang kudapetin isinya cuma `[redacted:User message]`, `[redacted:Assistant message]`. Nggak ada gunanya sama sekali buat nyimpen riwayat.
+
+Pelajaran: jangan asumsi opsi yang "kedengeran aman" itu cocok sama kebutuhan lo tanpa ngecek efeknya dulu. Baca dokumentasi, atau lebih baik lagi: coba langsung dan liat outputnya.
+
+**Kedua: nebak-nebak struktur JSON.**
+
+Aku sempet spent hampir satu jam bingung kenapa `session.title` selalu undefined. Kode udah bener, parsing udah bener, tapi tetep aja nggak dapet. Pas aku log output asli JSON-nya, baru sadar: struktur field-nya ternyata nested. Bukan `session.title`, tapi `session.info.title`. Dan detail teknis ada di `session.info.summary`, bukan `session.summary`.
+
+Pelajarannya: selalu cek struktur data asli langsung dari sumbernya. Jangan nebak dari nama field yang "kelihatan masuk akal". Dua menit buat console log JSON asli bisa nghemat satu jam debugging.
+
+**Ketiga: console.log yang nyasar.**
+
+Ini kecil tapi nyebelin. Waktu debugging, aku pasang `console.log` di plugin -- eh ternyata outputnya muncul di UI chat OpenCode. Bayangin lagi asik ngobrol terus tiba-tiba ada teks "DEBUG: session ID = ses_xxx" nyempil di tengah obrolan. Side-effect yang konyol, tapi ngajarin: lingkungan plugin itu bukan terminal biasa, efek samping logging bisa kelihatan di tempat yang nggak terduga.
+
+## Batasan yang Jujur
+
+Penting buat dibilang: ini BUKAN RAG, BUKAN semantic search, dan BUKAN pengganti AI memory. Ini cuma riwayat plain text yang kebetulan nyimpan di Obsidian. Search-nya ya pake native search Obsidian — `Ctrl+Shift+F` cari keyword, sama kayak nyari catetan biasa.
+
+Awalnya sempet kepikiran mau bikin semantic search juga. Biar bisa nanya "chat sebelumnya yang ngebahas auth JWT yang mana ya?" dan dapet jawaban dari riwayat lama. Tapi setelah nyoba, ternyata itu topik yang jauh lebih kompleks — dependency berat, masalah kompatibilitas versi library, dan overhead maintainance yang lumayan. Buat kebutuhan dasarku saat ini, riwayat plain text yang bisa di-cari manual udah lebih dari cukup. Mungkin nanti kalo emang butuh beneran.
+
+## Source Code
+
+Kalo penasaran atau mau nyoba, source code plugin-nya ada di sini:
+
+👉 [github.com/aditrachman/opencode-obsidian-plugin](https://github.com/aditrachman/Opencode-Obsidian-Export.git)
+
+Pull request, issue, atau ide welcome banget.
