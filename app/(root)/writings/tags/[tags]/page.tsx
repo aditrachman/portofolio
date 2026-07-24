@@ -10,7 +10,8 @@ type Props = {
 
 export default async function page({ params }: Props) {
   const tags = (await params).tags;
-  const posts = getAllPosts().filter((post) => post.tags.includes(tags));
+  const allPosts = await getAllPosts();
+  const posts = allPosts.filter((post) => post.tags.includes(tags));
 
   if (!posts) {
     notFound();

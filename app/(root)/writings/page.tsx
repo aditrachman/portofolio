@@ -4,7 +4,7 @@ import { getAllPosts } from "@/libs/Blog/post";
 import React from "react";
 
 export default async function page() {
-  const generatePost = getAllPosts();
+  const generatePost = await getAllPosts();
   return (
     <section>
       <Title emoji="✍️">Blog</Title>

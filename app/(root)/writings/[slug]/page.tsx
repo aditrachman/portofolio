@@ -5,17 +5,19 @@ import {
   getPostBySlug,
   mdxOptions,
 } from "@/libs/Blog/post";
+import { getComments } from "@/libs/comments";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
+import Comments from "@/components/Comments";
 
 type Props = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  const posts = getAllPosts();
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
   return posts.map((blog) => ({
     slug: blog.slug,
   }));
@@ -26,7 +28,9 @@ export default async function BlogPost({ params }: Props) {
     notFound();
   }
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
+  if (!post) notFound();
+  const comments = await getComments(slug);
 
   return (
     <section>
@@ -62,7 +66,7 @@ export default async function BlogPost({ params }: Props) {
       </header>
       <article className="prose lg:prose-base prose-invert">
         <MDXRemote
-          source={(await post).content}
+          source={post.content}
           options={mdxOptions}
           components={components}
         />
@@ -71,6 +75,8 @@ export default async function BlogPost({ params }: Props) {
         ~ Its the End of{" "}
         <span className="text-violet-300 underline">{post.title}</span> ~
       </p>
+
+      <Comments slug={slug} initialComments={comments} />
     </section>
   );
 }

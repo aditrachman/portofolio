@@ -5,5 +5,5 @@ export type Post = {
     emoji: string
     content: string
     readTime: number
-    tags: string[]
+    tags: string
   }

@@ -6,7 +6,7 @@ import React from "react";
 import { ArrowRight, PenTool } from "react-feather";
 
 export default async function Blog() {
-  const generatePost = getAllPosts();
+  const generatePost = await getAllPosts();
 
   return (
     <section className="space-y-8">
