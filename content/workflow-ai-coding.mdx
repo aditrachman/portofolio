@@ -1,0 +1,94 @@
+---
+title: "Workflow Coding pake AI — Cara Aku Ngoding di 2026"
+date: "2026-07-24"
+tags: "ai"
+emoji: "🤖"
+---
+
+Dulu awal-awal ChatGPT populer, aku pikir AI tuh tinggal bilang "bikin ini dong" terus jadi. Eh ternyata hasilnya amburadul wkwk.
+
+Sekarang di pertengahan 2026, cara aku ngoding udah berubah total. Bukan karena AI makin pinter — tapi karena aku nemu sistem yang bikin AI beneran efektif. Jadi pengalaman ini mau aku share aja siapa tau berguna buat yang bacain.
+
+## Alurnya gini
+
+```
+🧠 Brainstorming
+    ↓
+📝 PRD + Tech Stack — Claude
+    ↓
+🏗️ design.md — getdesign.md → Hallmark skill
+    ↓
+🤖 OpenCode + Ponytail skill
+    ↓
+🎨 Masukin Asset
+    ↓
+👀 Review — kalo error, ada escalation path
+```
+
+## 1. Brainstorming
+
+Mikir ide, kebutuhan, solusi kasar. Biasanya catet di Obsidian dulu atau ngobrol santai sama AI. Nggak usah formal formal, yang penting idenya ketangkep.
+
+## 2. PRD + Tech Stack — Claude
+
+Bikin Product Requirement Document pake Claude. Kalo aku si tech stack langsung masuk sini, nggak dipisah. Jadi isinya fitur apa aja, mau pake apa (Next.js, Laravel, Python, Firebase, dll), prioritasnya gimana.
+
+Kenapa Claude? Soalnya konsisten, ngerti bahasa Indonesia, dan jarang ngaco pas dikasih instruksi yang jelas.
+
+## 3. design.md — getdesign.md
+
+Ini yang bikin workflowku beda sama kebanyakan orang. Aku ambil referensi desain dari **[getdesign.md](https://getdesign.md/)** — bukan asal comot dari Dribbble.
+
+Abis dapet referensi, aku masukin ke **Hallmark skill** di OpenCode. Skill ini khusus anti-AI-slop design. Jadi desainnya keliatan intentional, bukan hasil generate pada umumnya. Dia auto ngatur struktur halaman, warna, tipografi — basically bikin desain yang konsisten dari awal.
+
+## 4. OpenCode + Ponytail — Eksekusi
+
+Mulai coding pake **OpenCode** sebagai terminal agent. Bedanya sama chat web biasa, dia bisa baca file project, ngerti struktur folder, dan ngejalanin command langsung.
+
+Di sini aku pake **Ponytail skill**. Skill ini maksain AI buat:
+- Nulis kode sesingkat mungkin
+- Pake stdlib dulu sebelum nambah dependency baru
+- Kalo bisa satu baris, ya satu baris
+- Nggak bikin kode yang "siapa tau nanti butuh" — intinya stop over-engineering
+
+Soalnya AI tuh kalo dikasih kebebasan suka nulis kode bengkak, masa iya 3 baris cukup tapi ditulis 30 baris? Ponytail ngebantu biar kode tetap ramping.
+
+Oh iya, **type checking & testing** belakangan aja dulu. Fokus pertama: kodenya jalan.
+
+## 5. Masukin Asset
+
+Setelah website jadi, **baru** aku suruh AI masukin aset. Gambar, ikon, font — dikirim setelah kerangkanya berdiri. Kalo dari awal udah sibuk milih asset, progress codingnya molor.
+
+## 6. Review & Escalation Path
+
+Nah ini bagian paling penting. Pas review ada 3 kemungkinan:
+
+**✅ Oke** — udah sesuai, deploy aja.
+
+**⚠️ Error minor** — kayak typo, styling off, import salah. Tinggal suruh OpenCode beresin, beres.
+
+**🔴 Error kompleks** — atau ada yang gak cocok secara arsitektur. Kalo gini, aku balik ke Claude. Kasi tau errornya atau apa yang gak sesuai, Claude bakal mikirin solusi + bikin panduan buat OpenCode. Baru panduan itu dikirim ke OpenCode buat dieksekusi.
+
+Jadi kaya gini:
+```
+OpenCode → error ringan, beresin sendiri
+Claude → error berat, mikir dulu baru kasih instruksi ke OpenCode
+```
+
+Ini yang bikin workflowku nggak mentok di satu AI.
+
+## Kenapa workflow ini cocok buatku?
+
+1. **Spek dulu baru kode** — hasilnya lebih terarah, gak asal nulis
+2. **Desain intentional** — Hallmark mastiin desain nggak keliatan slop
+3. **Kode minimal** — Ponytail mastiin nggak bengkak
+4. **Ada escalation path** — error kecil langsung, error berat naik level
+5. **Fleksibel** — project kecil cukup PRD → OpenCode → review doang
+
+## Intinya
+
+AI itu koki handal, tapi butuh resep. Workflow ini adalah resepnya. Tanpa sistem, AI cuma bakal ngasih kode yang keliatan bener tapi berantakan pas udah jalan.
+
+Kuncinya bukan pake AI atau nggak — tapi gimana caranya pake AI secara efektif.
+
+**Terima kasih sudah membaca semoga bermafaat** 🚀
