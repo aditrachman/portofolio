@@ -4,12 +4,11 @@ date: "2026-07-24"
 tags: "opencode"
 emoji: "📝"
 ---
-
 Beberapa minggu terakhir aku iseng-iseng ngoprek plugin system OpenCode. Bukan apa-apa, ada satu masalah yang udah lama mengganggu: setiap kali nutup sesi chat OpenCode, riwayat obrolan lenyap begitu aja. Yang tersisa cuma command `opencode -s ses_xxx` yang informatifnya... ya nol besar. Cuma ID, nggak ada konteks, nggak ada isi. Mau baca ulang obrolan kemarin soal debug API tertentu? Siap-siap buka ulang dari awal atau lupa sama sekali.
 
 ## Kenapa Obsidian?
 
-Aku udah pake Obsidian buat nyatetin hampir semua hal — daily notes, ide project, catetan meeting, bahkan draft tulisan kayak gini. Udah kayak "second brain" beneran. Jadi daripada bikin sistem penyimpanan baru yang terpisah, kenapa nggak nempel aja riwayat chat-nya di vault yang sama? Satu tempat buat semuanya, bisa di-search bareng, di-tag bareng, dan dibaca offline kapan aja.
+Aku udah pake Obsidian buat nyatetin hampir semua hal mulai dari daily notes, ide project, catetan meeting, bahkan draft tulisan kayak gini. Udah kayak "second brain" beneran. Jadi daripada bikin sistem penyimpanan baru yang terpisah, kenapa nggak nempel aja riwayat chat-nya di vault yang sama? Satu tempat buat semuanya, bisa di-search bareng, di-tag bareng, dan dibaca offline kapan aja.
 
 Solusi yang paling masuk akal: bikin plugin yang otomatis nyimpen setiap sesi chat jadi file markdown di folder khusus dalam vault Obsidian.
 
@@ -27,9 +26,9 @@ Alurnya kurang lebih gini:
 
 Hasilnya: setiap selesai ngobrol, file markdown langsung muncul di vault. Bisa dibaca di Obsidian, di-search pake native search Obsidian, atau di-tag sesuai kebutuhan. Simpel, nggak perlu ribet.
 
-## Pelajaran yang Didapat dengan Cara Agak Konyol
+## Dapet pelajaran bjirrr
 
-Nah, bagian ini yang paling berharga buatku: kesalahan-kesalahan bodoh yang nyedot waktu berjam-jam.
+Nah, bagian ini yang paling gud buatku: kesalahan-kesalahan gembluk yang nyedot waktu berjam-jam.
 
 **Pertama: masalah `--sanitize`.**
 
