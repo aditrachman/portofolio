@@ -1,7 +1,7 @@
 "use server"
 
 import { createSession, destroySession, checkPassword, verifySession } from "@/libs/auth"
-import { commitPost, getPost, listPosts, deletePost } from "@/libs/github"
+import { commitPost, getPost, deletePost } from "@/libs/github"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 

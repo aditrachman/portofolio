@@ -4,7 +4,7 @@ import { removePost } from "../actions"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
-export default function DeleteButton({ slug, title }: { slug: string; title: string }) {
+export default function DeleteButton({ slug }: { slug: string }) {
   const [confirming, setConfirming] = useState(false)
   const router = useRouter()
 

@@ -106,7 +106,7 @@ export default async function AdminDashboard() {
                   >
                     Edit
                   </Link>
-                  <DeleteButton slug={post!.slug} title={post!.title} />
+                  <DeleteButton slug={post!.slug} />
                 </div>
               </div>
             )

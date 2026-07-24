@@ -1,6 +1,7 @@
 import { getPost } from "@/libs/github"
 import { getComments } from "@/libs/comments"
 import { notFound } from "next/navigation"
+import Link from "next/link"
 import PostEditor from "../../components/PostEditor"
 import matter from "gray-matter"
 import { formatDate } from "@/libs/Blog/formatDate"
@@ -20,9 +21,9 @@ export default async function EditPost({
   return (
     <div>
       <div className="flex items-center gap-3 mb-8">
-        <a href="/admin" className="text-sm text-white/40 hover:text-white/60">
+        <Link href="/admin" className="text-sm text-white/40 hover:text-white/60">
           ← CMS
-        </a>
+        </Link>
         <span className="text-white/20">/</span>
         <h1 className="text-2xl font-semibold">✏️ {data.title}</h1>
       </div>
