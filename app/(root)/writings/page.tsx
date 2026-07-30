@@ -1,7 +1,19 @@
 import PostCard from "@/components/Layout/PostCard";
 import Title from "@/components/Layout/Title";
 import { getAllPosts } from "@/libs/Blog/post";
+import type { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Writings",
+  description:
+    "Tulisan dan catatan seputar coding, AI, dan pengembangan web dari Adit Rachman.",
+  openGraph: {
+    title: "Writings - Adit Rachman",
+    description:
+      "Tulisan dan catatan seputar coding, AI, dan pengembangan web dari Adit Rachman.",
+  },
+};
 
 export default async function page() {
   const generatePost = await getAllPosts();

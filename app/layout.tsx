@@ -5,10 +5,12 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 
+const ogImage = "/assets/og-image.png";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aditrachman.github.io/"),
+  metadataBase: new URL("https://aditrachman.vercel.app"),
   title: {
-    default: "Adit Rachman",
+    default: "Adit Rachman — Frontend Developer & Data Analyst | Magelang",
     template: "%s - Adit Rachman",
   },
   description:
@@ -21,14 +23,19 @@ export const metadata: Metadata = {
     "portofolio",
   ],
   openGraph: {
-    siteName: "aditrachman.github.io",
+    siteName: "aditrachman.vercel.app",
     title: "Adit Rachman",
     description:
       "Frontend Developer yang suka bikin proyek web modern, fokus di desain simpel, fungsional, dan user-friendly.",
     images: [
-      "https://media.discordapp.net/attachments/1310990889065123883/1324049418474749953/Untitled_8.png?ex=6776bc9d&is=67756b1d&hm=5dc0e70688eecc7add808c723df77e427c9ce3833933f95a85f2183aa5fa66ef&=&format=webp&quality=lossless",
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Adit Rachman — Frontend Developer & Data Analyst",
+      },
     ],
-    locale: "en-ID",
+    locale: "id_ID",
     type: "website",
   },
   twitter: {
@@ -36,9 +43,7 @@ export const metadata: Metadata = {
     title: "Adit Rachman",
     description:
       "Frontend Developer | Ngebangun web apps modern dengan desain clean dan pengalaman pengguna yang nyaman.",
-    images: [
-      "https://media.discordapp.net/attachments/1310990889065123883/1324049418474749953/Untitled_8.png?ex=6776bc9d&is=67756b1d&hm=5dc0e70688eecc7add808c723df77e427c9ce3833933f95a85f2183aa5fa66ef&=&format=webp&quality=lossless",
-    ],
+    images: [ogImage],
     creator: "@aditrachman",
   },
 };
@@ -48,9 +53,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Adit Rachman",
+    jobTitle: "Frontend Developer",
+    url: "https://aditrachman.vercel.app",
+    sameAs: [
+      "https://github.com/aditrachman",
+      "https://instagram.com/aditrachman_",
+    ],
+  };
+
   return (
-    <html lang="en">
+    <html lang="id">
       <body className={`${Grotesk.className} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
         <Analytics />
         <SpeedInsights />

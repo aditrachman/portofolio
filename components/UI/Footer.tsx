@@ -7,23 +7,16 @@ import { useState, useEffect } from "react";
 export default function Footer() {
   const [time, setTime] = useState<string>("");
 
-  const formatTime = (num: number): string => (num < 10 ? `0${num}` : `${num}`);
-
-  const updateTime = () => {
-    const today = new Date();
-    const hh = today.getHours();
-    const mm = today.getMinutes();
-    const ss = today.getSeconds();
-
-    const formattedTime = `${formatTime(hh)}:${formatTime(mm)}:${formatTime(ss)}`;
-    setTime(formattedTime);
-  };
-
 useEffect(() => {
-  updateTime();
-  const intervalId = setInterval(updateTime, 1000);
-  return () => clearInterval(intervalId);
-}, [updateTime]);
+  const pad = (n: number) => (n < 10 ? `0${n}` : `${n}`);
+  const tick = () => {
+    const now = new Date();
+    setTime(`${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`);
+  };
+  tick();
+  const id = setInterval(tick, 1000);
+  return () => clearInterval(id);
+}, []);
 
   const socialLinks = [
     {

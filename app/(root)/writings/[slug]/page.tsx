@@ -7,6 +7,7 @@ import {
 } from "@/libs/Blog/post";
 import { getComments } from "@/libs/comments";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -21,6 +22,32 @@ export async function generateStaticParams() {
   return posts.map((blog) => ({
     slug: blog.slug,
   }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+  if (!post) return {};
+
+  const cleanContent = post.content
+    .replace(/<[^>]*>/g, "")
+    .replace(/^#+\s*/gm, "")
+    .trim();
+  const description =
+    cleanContent.split(/\.\n|\.\s/).slice(0, 2).join(". ").slice(0, 160) ||
+    `Baca ${post.title} di blog Adit Rachman.`;
+
+  return {
+    title: post.title,
+    description,
+    openGraph: {
+      title: post.title,
+      description,
+      type: "article",
+      publishedTime: post.date,
+      tags: post.tags ? [post.tags] : [],
+    },
+  };
 }
 
 export default async function BlogPost({ params }: Props) {
@@ -64,6 +91,22 @@ export default async function BlogPost({ params }: Props) {
         </div>
         <hr className="mt-5 mb-20 border-t border-t-[#252529]" />
       </header>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            datePublished: post.date,
+            author: {
+              "@type": "Person",
+              name: "Adit Rachman",
+            },
+            description: post.tags || `Baca ${post.title} di blog Adit Rachman.`,
+          }),
+        }}
+      />
       <article className="prose lg:prose-base prose-invert">
         <MDXRemote
           source={post.content}
