@@ -8,11 +8,6 @@ export const metadata: Metadata = {
   title: "Writings",
   description:
     "Tulisan dan catatan seputar coding, AI, dan pengembangan web dari Adit Rachman.",
-  openGraph: {
-    title: "Writings - Adit Rachman",
-    description:
-      "Tulisan dan catatan seputar coding, AI, dan pengembangan web dari Adit Rachman.",
-  },
 };
 
 export default async function page() {

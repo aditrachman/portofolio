@@ -32,6 +32,19 @@ async function rawFetch(url: string): Promise<string | null> {
   return res.text()
 }
 
+// Date-invalid posts break the sort (NaN comparisons) → filter + warn instead
+function sortByDateDesc(posts: Post[]): Post[] {
+  const valid = posts.filter((p) => !Number.isNaN(new Date(p.date).getTime()));
+  if (valid.length !== posts.length) {
+    console.warn(
+      `[blog] skipped ${posts.length - valid.length} post(s) with invalid frontmatter date`
+    );
+  }
+  return valid.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+}
+
 export async function getAllPosts(): Promise<Post[]> {
   // Fallback: if no GH_TOKEN, read from filesystem
   if (!GH_TOKEN) {
@@ -60,13 +73,11 @@ export async function getAllPosts(): Promise<Post[]> {
       emoji: fm.emoji || "📄",
       content: content,
       readTime: calculateReadTime(content || ""),
-      tags: fm.tags || "",
+      tags: (fm.tags || "").trim(),
     })
   }
 
-  return posts.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  )
+  return sortByDateDesc(posts)
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
@@ -89,7 +100,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     emoji: fm.emoji || "📄",
     content,
     readTime: calculateReadTime(content || ""),
-    tags: fm.tags || "",
+    tags: (fm.tags || "").trim(),
   }
 }
 
@@ -159,12 +170,10 @@ function getAllPostsLocal(): Post[] {
           emoji: data.emoji,
           content: content,
           readTime: calculateReadTime(content),
-          tags: data.tags,
+          tags: (data.tags || "").trim(),
         }
       })
-    return posts.sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-    )
+    return sortByDateDesc(posts)
   } catch {
     return []
   }
@@ -182,7 +191,7 @@ function getPostBySlugLocal(slug: string): Post | null {
       emoji: data.emoji,
       content,
       readTime: calculateReadTime(content),
-      tags: data.tags || "",
+      tags: (data.tags || "").trim(),
     }
   } catch {
     return null
