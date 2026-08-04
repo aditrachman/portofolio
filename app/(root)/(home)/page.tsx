@@ -5,7 +5,7 @@ import GitHubCalendar from "react-github-calendar";
 import Blog from "./content/Blog";
 import About from "./content/About";
 import Projects from "./content/Projects";
-import { MapPin, Calendar } from "react-feather";
+import { MapPin, Calendar, Mail, ArrowDown } from "react-feather";
 
 export default function page() {
   return (
@@ -34,6 +34,23 @@ export default function page() {
                 I create modern web applications and analyze data to build meaningful digital experiences.
                 Currently focused on React, Next.js, and data visualization.
               </p>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-3 sm:gap-4">
+                <a
+                  href="mailto:aditrachman23@gmail.com"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium text-sm"
+                >
+                  <Mail size={16} />
+                  Contact Me
+                </a>
+                <a
+                  href="#projects"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-border hover:border-border-light text-foreground rounded-lg transition-colors text-sm"
+                >
+                  Browse Projects
+                  <ArrowDown size={16} />
+                </a>
+              </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 sm:gap-6 text-sm text-foreground-muted">
                 <div className="flex items-center gap-2">

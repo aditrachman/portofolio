@@ -1,4 +1,5 @@
 import Title from "@/components/Layout/Title";
+import Link from "next/link";
 import React from "react";
 
 export default function About() {
@@ -18,16 +19,30 @@ export default function About() {
       <div className="space-y-8">
         <div className="space-y-6">
           <p className="text-lg text-foreground leading-relaxed">
-            I was born in <span className="text-white font-medium">Magelang, Indonesia</span>, and I&apos;m a frontend developer
-            and data analyst. Since an early age,  I&apos;ve been fascinated by
-            technology and creativity, which led me to explore how things work
-            and how data can shape better decisions.
+            I&apos;m an <span className="text-white font-medium">Informatics Engineering</span> student
+            at Universitas Muhammadiyah Magelang, and I build things at the
+            intersection of frontend and data. As a teaching assistant for the
+            Database course, I spend my weeks explaining query plans and
+            normalization to juniors — which turned out to be the best crash
+            course in thinking about data as a system, not a spreadsheet.
           </p>
 
           <p className="text-foreground-muted leading-relaxed">
-            My journey combines the art of creating beautiful, functional user interfaces
-            with the science of extracting meaningful insights from data. I believe that
-            great products are born from the intersection of design, technology, and data-driven decisions.
+            My hands-on work mirrors that: React &amp; Next.js for the interface
+            layer, Python for analysis and machine learning, Firebase for the
+            plumbing in between. I&apos;m most interested in data-driven
+            products — the kind that feel alive because they&apos;re actually
+            reading signals, not static screens.
+          </p>
+
+          <p className="text-foreground-muted leading-relaxed">
+            Right now I&apos;m exploring predictive modeling on IoT sensor data,
+            and an AI-assisted coding workflow I&apos;ve been documenting on{" "}
+            <Link href="/writings" className="text-white hover:underline">
+              my blog
+            </Link>
+            . I&apos;m looking for frontend, data, or full-stack
+            opportunities — remote or in Magelang.
           </p>
         </div>
 
@@ -47,7 +62,7 @@ export default function About() {
 
         <div className="border border-border rounded-2xl p-6 bg-background-secondary/30">
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-foreground">Lets Work Together</h3>
+            <h3 className="text-lg font-medium text-foreground">Let&apos;s Work Together</h3>
             <p className="text-foreground-muted leading-relaxed">
               If you have an interesting project or need someone with a mix
               of frontend and data analysis skills, feel free to reach out—I&apos;d

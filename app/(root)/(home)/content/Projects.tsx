@@ -42,7 +42,7 @@ export default function Projects() {
   ];
 
   return (
-    <section className="space-y-8">
+    <section id="projects" className="space-y-8">
       <Title emoji="💼">Projects</Title>
 
       <div className="space-y-8">
