@@ -18,6 +18,39 @@ export default function Projects() {
     },
 
     {
+      label: "IoT Smart Irrigation",
+      image: "iot-irrigation.png",
+      tech: "ESP8266 & Firebase",
+      summary: "An automated irrigation system on a Wemos D1 Mini (ESP8266) that waters plants based on real-time soil moisture from AHT10, GY-21, and BMP180 sensors, streamed to Firebase Realtime Database. Instead of watering on a fixed timer, it tracks moisture trends to predict when the soil actually needs water — so plants stay healthy and water isn't wasted.",
+      tags: ["ESP8266", "Firebase", "C++", "IoT"],
+      link: "",
+      github: "",
+      status: "In Progress"
+    },
+
+    {
+      label: "MauRun",
+      image: "maurun.png",
+      tech: "Laravel 11 & Blade",
+      summary: "A race event registration platform for Indonesian running events — from 3K fun runs to full marathons. Handles event management with quota control, online registration, and discount codes, built on Laravel 11 with Blade, Tailwind CSS, and MySQL.",
+      tags: ["Laravel", "Blade", "TailwindCSS", "MySQL"],
+      link: "https://github.com/aditrachman/MauRun",
+      github: "https://github.com/aditrachman/MauRun",
+      status: "Open Source"
+    },
+
+    {
+      label: "Manga Recommender",
+      image: "manga-recommender.png",
+      tech: "Python & scikit-learn",
+      summary: "A content-based manga recommendation system built with the CRISP-DM methodology. Scores similarity by blending genre multi-hot encoding, synopsis sentence embeddings (all-MiniLM-L6-v2), and themes scraped from the AniList API — evaluated with Precision/Recall and MAP.",
+      tags: ["Python", "scikit-learn", "sentence-transformers", "CRISP-DM"],
+      link: "https://github.com/aditrachman/Manga-Recommender",
+      github: "https://github.com/aditrachman/Manga-Recommender",
+      status: "Open Source"
+    },
+
+    {
       label: "Read Manga Website",
       image: "mocomanga.png",
       tech: "Next.js",
@@ -27,17 +60,6 @@ export default function Projects() {
       link: "https://mocomanga.vercel.app/",
       github: "https://github.com/aditrachman/mocomanga",
       status: "Live"
-    },
-
-    {
-      label: "Sentiment Analysis App",
-      image: "analisa.png",
-      tech: "Python",
-      summary: "An NLP-based app for classifying text sentiment (positive, negative, neutral). Combines data analysis with a clean UI.",
-      tags: ["Orange3", "X", "Python"],
-      link: "https://github.com/aditrachman/Analisa-Sentimen-X",
-      github: "https://github.com/aditrachman/Analisa-Sentimen-X",
-      status: "Open Source"
     },
   ];
 
@@ -90,15 +112,17 @@ export default function Projects() {
                             <GitHub size={16} />
                           </Link>
                         )}
-                        <Link
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium text-sm"
-                        >
-                          <ExternalLink size={14} />
-                          View Project
-                        </Link>
+                        {project.link && (
+                          <Link
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium text-sm"
+                          >
+                            <ExternalLink size={14} />
+                            View Project
+                          </Link>
+                        )}
                       </div>
                     </div>
                   </div>
