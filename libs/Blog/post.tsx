@@ -20,18 +20,6 @@ async function ghFetch(url: string) {
   return res.json()
 }
 
-async function rawFetch(url: string): Promise<string | null> {
-  const res = await fetch(url, {
-    next: { revalidate: 60 },
-    headers: {
-      Authorization: `Bearer ${GH_TOKEN}`,
-      "User-Agent": "aditrachman-portofolio",
-    },
-  })
-  if (!res.ok) return null
-  return res.text()
-}
-
 // Date-invalid posts break the sort (NaN comparisons) → filter + warn instead
 function sortByDateDesc(posts: Post[]): Post[] {
   const valid = posts.filter((p) => !Number.isNaN(new Date(p.date).getTime()));
@@ -60,8 +48,13 @@ export async function getAllPosts(): Promise<Post[]> {
 
   for (const file of files) {
     const slug = file.name.replace(".mdx", "")
-    const raw = await rawFetch(file.download_url)
-    if (!raw) continue
+    // ponytail: raw.githubusercontent.com rate-limits shared IPs (429) →
+    // use Contents API (base64) instead, same as getPostBySlug
+    const fileRes = await ghFetch(
+      `${API}/repos/${OWNER}/${REPO}/contents/content/${file.name}`,
+    )
+    if (!fileRes?.content) continue
+    const raw = Buffer.from(fileRes.content, "base64").toString("utf-8")
 
     // Simple frontmatter parsing (gray-matter works on server too)
     const { data: fm, content } = parseFrontmatter(raw)
