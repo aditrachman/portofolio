@@ -2,13 +2,13 @@ import Title from "@/components/Layout/Title";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { ExternalLink, GitHub } from "react-feather";
+import { ChevronDown, ExternalLink, GitHub } from "react-feather";
 
 export default function Projects() {
   const projects = [
     {
       label: "VoxSwarm",
-      image: "aether-swarm.png", // 
+      image: "voxswarm.png",
       tech: "Next.js & FastAPI",
       summary: "A professional Behavioral Intelligence Engine that simulates social agents' reactions to specific topics and predicts social stability or volatility using real-time data analysis.",
       tags: ["Next.js", "Tailwind CSS", "Python", "FastAPI"],
@@ -18,19 +18,8 @@ export default function Projects() {
     },
 
     {
-      label: "IoT Smart Irrigation",
-      image: "iot-irrigation.png",
-      tech: "ESP8266 & Firebase",
-      summary: "An automated irrigation system on a Wemos D1 Mini (ESP8266) that waters plants based on real-time soil moisture from AHT10, GY-21, and BMP180 sensors, streamed to Firebase Realtime Database. Instead of watering on a fixed timer, it tracks moisture trends to predict when the soil actually needs water — so plants stay healthy and water isn't wasted.",
-      tags: ["ESP8266", "Firebase", "C++", "IoT"],
-      link: "",
-      github: "",
-      status: "In Progress"
-    },
-
-    {
       label: "MauRun",
-      image: "maurun.png",
+      image: "Maurun.png",
       tech: "Laravel 11 & Blade",
       summary: "A race event registration platform for Indonesian running events — from 3K fun runs to full marathons. Handles event management with quota control, online registration, and discount codes, built on Laravel 11 with Blade, Tailwind CSS, and MySQL.",
       tags: ["Laravel", "Blade", "TailwindCSS", "MySQL"],
@@ -67,39 +56,60 @@ export default function Projects() {
     <section id="projects" className="space-y-8">
       <Title emoji="💼">Projects</Title>
 
-      <div className="space-y-8">
+      <div className="space-y-4">
         {projects.map((project, idx) => {
           return (
-            <div key={idx} className="border border-border rounded-2xl p-6 hover:border-border-light transition-colors">
-              <div className="flex flex-col lg:flex-row gap-6">
-                {/* Project Image */}
-                <div className="w-full lg:w-1/3 flex-shrink-0">
-                  <div className="relative overflow-hidden rounded-xl border border-border aspect-video">
+            <details
+              key={idx}
+              className="group border border-border rounded-2xl hover:border-border-light transition-colors"
+            >
+              <summary className="flex items-center justify-between gap-4 p-4 cursor-pointer select-none list-none [&::-webkit-details-marker]:hidden">
+                <div className="flex items-center gap-4 flex-wrap">
+                  <div className="relative overflow-hidden rounded-lg border border-border aspect-video w-28 flex-shrink-0">
                     <Image
                       src={`/assets/project/${project.image}`}
                       alt={`${project.label} preview`}
-                      width={400}
-                      height={250}
+                      width={112}
+                      height={63}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute top-3 right-3 px-2 py-1 bg-background/90 backdrop-blur-sm text-foreground text-xs rounded-full border border-border">
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {project.label}
+                    </h3>
+                    <p className="text-sm text-foreground-muted font-mono">
+                      {project.tech}
+                    </p>
+                    <span className="inline-block px-2 py-0.5 bg-background/90 text-foreground text-xs rounded-full border border-border">
                       {project.status}
-                    </div>
+                    </span>
                   </div>
                 </div>
+                <ChevronDown
+                  size={20}
+                  className="text-foreground-muted transition-transform group-open:rotate-180 flex-shrink-0"
+                />
+              </summary>
 
-                {/* Project Info */}
-                <div className="flex-1 space-y-4">
-                  <div className="space-y-2">
+              <div className="px-6 pb-6 space-y-4">
+                <div className="flex flex-col lg:flex-row gap-6">
+                  {/* Project Image */}
+                  <div className="w-full lg:w-1/3 flex-shrink-0">
+                    <div className="relative overflow-hidden rounded-xl border border-border aspect-video">
+                      <Image
+                        src={`/assets/project/${project.image}`}
+                        alt={`${project.label} preview`}
+                        width={400}
+                        height={250}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Project Info */}
+                  <div className="flex-1 space-y-4">
                     <div className="flex items-start justify-between gap-4">
-                      <div className="space-y-1">
-                        <h3 className="text-xl font-semibold text-foreground">
-                          {project.label}
-                        </h3>
-                        <p className="text-sm text-foreground-muted font-mono">
-                          {project.tech}
-                        </p>
-                      </div>
                       <div className="flex items-center gap-2 flex-shrink-0">
                         {project.github && (
                           <Link
@@ -125,25 +135,25 @@ export default function Projects() {
                         )}
                       </div>
                     </div>
-                  </div>
 
-                  <p className="text-foreground-muted leading-relaxed">
-                    {project.summary}
-                  </p>
+                    <p className="text-foreground-muted leading-relaxed">
+                      {project.summary}
+                    </p>
 
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, tagIdx) => (
-                      <span
-                        key={tagIdx}
-                        className="px-3 py-1 bg-background-secondary text-foreground-muted text-sm rounded-full border border-border font-mono"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag, tagIdx) => (
+                        <span
+                          key={tagIdx}
+                          className="px-3 py-1 bg-background-secondary text-foreground-muted text-sm rounded-full border border-border font-mono"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </details>
           );
         })}
       </div>
