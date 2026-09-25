@@ -9,16 +9,20 @@ import { useId, useEffect, useState } from "react";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const drawerId = useId();
+  const [isMounted, setIsMounted] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const drawerId = useId();
 
   useEffect(() => {
+    setIsMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  if (!isMounted) return <nav className="sticky top-0 z-50 py-6 sm:py-8 border-b border-border"><div className="px-4 sm:px-6 lg:px-8 mx-auto max-w-4xl" /></nav>;
 
   const Links = [
     { label: "home", path: "/" },
@@ -29,7 +33,7 @@ export default function Navbar() {
   return (
     <nav className={cn(
       "sticky top-0 z-50 transition-all duration-300",
-      isScrolled
+       isScrolled || false
         ? "glass border-b border-border py-4"
         : "border-b border-border py-6 sm:py-8"
     )}>
