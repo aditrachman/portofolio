@@ -7,6 +7,17 @@ import { ChevronDown, ExternalLink, GitHub } from "react-feather";
 export default function Projects() {
   const projects = [
     {
+      label: "BEM FT UNIMMA",
+      image: "bem.png",
+      tech: "Next.js & Firebase",
+      summary: "Official website for the Student Executive Board (BEM) of the Faculty of Engineering, Universitas Muhammadiyah Magelang. Built with Next.js 15, Tailwind CSS 4, and Firebase for real-time updates and membership management.",
+      tags: ["Next.js", "Tailwind CSS", "Firebase", "TypeScript"],
+      link: "https://bem-ft-unimma.vercel.app/",
+      github: "https://github.com/aditrachman/bem-ft-nextjs",
+      status: "Live"
+    },
+
+    {
       label: "VoxSwarm",
       image: "voxswarm.png",
       tech: "Next.js & FastAPI",
